@@ -30,10 +30,10 @@ When setting up the files for your project there are a few whing you will need t
 First: 
 The name of the function that will return the move, should look like this:
 ```cpp
-move <player_name>(raw_boardstate boardstate){
+move <player_name>(raw_boardstate boardstate, std::atomic<int> *time_left){
 //ai stuff
 
-return (move)<your move>;
+  return (move)<your move>;
 };
 ```
 Data types like move and raw_bordstate are given in the globals.cpp and globals.hpp amongst many other useful functions and structs.
@@ -41,8 +41,11 @@ including them into your project is *almost nessecery* to get cleanly running co
 Its **very important** to name the function that will return the move for the given boardstate the same name as the one configured as player_name in config.csv.
 
 #### SO - files
-When using TTT-masters it's very important to compile your AI build into a shared object, with the same name as the 'player_name' set by your config file. You will also need to add lib infront resulting in the follwing nameing scheme: 
-"/lib<player_name>.so"
+When using TTT-masters it's very important to compile your AI build into a shared object, with the same name as the 'player_name' set by your config file. 
+"/<player_name>.so"
+
+When creating your function it is important to add extern "C" in front of the function decleration in your header file.
+If no SO file is given, a player will be be set to play by hand instead.
 
 How the so-file is compiled and build is up to you but it might be helpful to use the structure and build.bash used for the exampel-bot rando_bot.
 
@@ -77,10 +80,18 @@ struct move{
     int spot;
 };
 ```
-It is simply a structed used to store a move. A move is given by 2 numbers: 
+It is simply a struct used to store a move. A move is given by 2 numbers: 
 - sub, the sub_board where the move should take place.
 - spot, the spot within the sub where thw move shall occur.
 
 Note it dosent say whitch piece should be placed, this is automaticly figured out by the TTT-masters program.
 
-**more stuff comming**
+#### Settings
+In the main directory, you will also see the settings.json file.
+The following will try to explain the function of each 'setting':
+  timeout (int): The amount of time before a given AI is forced to forfiet the game. This timeout does not concern a player playing by hand.
+  starting_pieces (int): The amount of pieces place before the game begins. This is so derterministick AI's can play more than one game.
+  seed (int): The seed used to determien the random outcome of the pre-placed pieces. If this is set to -1, the seed is whill be randomly assigned.
+  dot_path (string): The path to the folder containing the, SO and config of the player playing dot.
+  cross_path (string): The path to the folder containing the, SO and config of the player playing cross.
+  starting (string): The starting player. This will also flip the pre-placed pieces. it can be either "dot" or "cross"

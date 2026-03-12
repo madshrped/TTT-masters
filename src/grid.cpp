@@ -94,6 +94,18 @@ void grid::draw_X(int index){
     DrawLineEx(diag2.start, diag2.end, thickness, X_color);
 };
 
+void grid::draw_tie(){
+    float width = (_area.width/2.f)*0.85f;
+    pole diag1 = {{global_position_center.x - width, global_position_center.y - width}, {global_position_center.x + width, global_position_center.y - width}};
+    pole diag2 = {{global_position_center.x, global_position_center.y - width}, {global_position_center.x, global_position_center.y + width}};
+
+    float thickness = global_pole_width*2;
+    Color T_color  = LIME;
+
+    DrawLineEx(diag1.start, diag1.end, thickness, T_color);
+    DrawLineEx(diag2.start, diag2.end, thickness, T_color);
+};
+
 void grid::draw_O(int index){
     float width = ((_area.width/3.f - global_pole_width)/2.f)*0.85f;
 

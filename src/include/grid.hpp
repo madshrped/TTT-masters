@@ -44,6 +44,7 @@ class grid{
         void draw_spots();
         void draw_X(int index);
         void draw_O(int index);
+        void draw_tie();
         void draw_winner(piece winner);
 
         Vector2 rel_to_global(Vector2 rel_position);

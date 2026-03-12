@@ -89,9 +89,9 @@ Note it dosent say whitch piece should be placed, this is automaticly figured ou
 #### Settings
 In the main directory, you will also see the settings.json file.
 The following will try to explain the function of each 'setting':
-  timeout (int): The amount of time before a given AI is forced to forfiet the game. This timeout does not concern a player playing by hand.
-  starting_pieces (int): The amount of pieces place before the game begins. This is so derterministick AI's can play more than one game.
-  seed (int): The seed used to determien the random outcome of the pre-placed pieces. If this is set to -1, the seed is whill be randomly assigned.
-  dot_path (string): The path to the folder containing the, SO and config of the player playing dot.
-  cross_path (string): The path to the folder containing the, SO and config of the player playing cross.
-  starting (string): The starting player. This will also flip the pre-placed pieces. it can be either "dot" or "cross"
+- timeout (int): The amount of time before a given AI is forced to forfiet the game. This timeout does not concern a player playing by hand.
+- starting_pieces (int): The amount of pieces place before the game begins. This is so derterministick AI's can play more than one game.
+- seed (int): The seed used to determien the random outcome of the pre-placed pieces. If this is set to -1, the seed is whill be randomly assigned.
+- dot_path (string): The path to the folder containing the, SO and config of the player playing dot.
+- cross_path (string): The path to the folder containing the, SO and config of the player playing cross.
+- starting (string): The starting player. This will also flip the pre-placed pieces. it can be either "dot" or "cross"

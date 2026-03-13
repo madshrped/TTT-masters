@@ -334,9 +334,7 @@ void setup_board(){
 }
 
 int main() {
-  SetConfigFlags(FLAG_WINDOW_HIGHDPI);
   InitWindow(screen_width, screen_height, "TTT-masters");
-  SetWindowSize(screen_width, screen_height);
   printf("Screen: %dx%d\n", GetScreenWidth(), GetScreenHeight());
   printf("Render: %dx%d\n", GetRenderWidth(), GetRenderHeight());
   SetTargetFPS(60);

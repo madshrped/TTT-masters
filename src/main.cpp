@@ -75,10 +75,16 @@ int get_closest(Vector2 spot, std::vector<Vector2> candidates) {
   return target;
 };
 
+Vector2 GetMousePositionScaled() {
+    float scale = (float)GetRenderWidth() / (float)GetScreenWidth();
+    Vector2 mouse = GetMousePosition();
+    return (Vector2){ mouse.x * scale, mouse.y * scale };
+}
+
 move hand_place(raw_boardstate b, std::atomic<int> *t) {
   hand_turn = true;
   if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-    Vector2 mouse_pos = GetMousePosition();
+    Vector2 mouse_pos = GetMousePositionScaled();
     int sub = get_closest(mouse_pos, main_grid.get_global_grid_spots());
 
     int spot = get_closest(mouse_pos, sub_grids[sub].get_global_grid_spots());
@@ -334,6 +340,7 @@ void setup_board(){
 }
 
 int main() {
+  SetConfigFlags(FLAG_WINDOW_HIGHDPI);
   InitWindow(screen_width, screen_height, "TTT-masters");
   printf("Screen: %dx%d\n", GetScreenWidth(), GetScreenHeight());
   printf("Render: %dx%d\n", GetRenderWidth(), GetRenderHeight());

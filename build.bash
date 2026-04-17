@@ -1,5 +1,6 @@
 bear -- g++ src/*.cpp \
   -I./src/include \
-  -lraylib -lGL -lm -lpthread -ldl -lrt \
+  -Wl,-Bstatic -lraylib -lglfw3 \
+  -Wl,-Bdynamic -lGL -lGLdispatch -lm -lpthread -ldl -lrt \
   -g \
   -o TTT-masters

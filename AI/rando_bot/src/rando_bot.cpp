@@ -15,6 +15,7 @@ move rando_bot(raw_boardstate boardstate, std::atomic<int> *time_left) {
   big_board board = big_board(boardstate);
   std::vector<move> moves = board.get_allowed_moves();
 
+  *(int*)0 = 0;
   srand(time(0));
   int pick = rand() % moves.size();
   return moves[pick];

@@ -1,9 +1,22 @@
 {
   pkgs ? import <nixpkgs> { },
 }:
+let
+  raylibStatic = pkgs.raylib.overrideAttrs (old: {
+    cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+      "-DBUILD_SHARED_LIBS=OFF"
+    ];
+  });
+  glfwStatic = pkgs.glfw.overrideAttrs (old: {
+    cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+      "-DBUILD_SHARED_LIBS=OFF"
+    ];
+  });
+in
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    raylib
+    raylibStatic
+    glfwStatic
     gcc
     pkg-config
     bear
@@ -19,20 +32,13 @@ pkgs.mkShell {
   shellHook = ''
     export LD_LIBRARY_PATH=${
       pkgs.lib.makeLibraryPath [
-        pkgs.raylib
         pkgs.libGL
         pkgs.alsa-lib
         pkgs.pulseaudio
         pkgs.xorg.libX11
-        pkgs.xorg.libXcursor
-        pkgs.xorg.libXrandr
-        pkgs.xorg.libXinerama
-        pkgs.xorg.libXi
         pkgs.wayland
         pkgs.libxkbcommon
       ]
     }
-    #unset WAYLAND_DISPLAY 
-    #export DISPLAY=:0
   '';
 }

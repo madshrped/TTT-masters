@@ -18,6 +18,9 @@
 #include "player_banner.hpp"
 #include "sub_board.hpp"
 
+#include <csignal>
+#include <stdexcept>
+
 #define SETTINGS_PATH "settings.json"
 
 float screen_width = 800;
@@ -282,10 +285,10 @@ void draw() {
 
     if (board.get_winner() == CROSS) {
       DrawText(cross_banner.get_player_name().c_str(), winner_x, status_y, status_font_size, RED);
-      DrawText((cross_banner.get_player_name() + win_msg).c_str(), win_msg_pos.x, win_msg_pos.y, win_msg_font_size, RED);
+      if(win_msg != "") DrawText((cross_banner.get_player_name() + win_msg).c_str(), win_msg_pos.x, win_msg_pos.y, win_msg_font_size, RED);
     } else if (board.get_winner() == DOT) {
       DrawText(dot_banner.get_player_name().c_str(), winner_x, status_y, status_font_size, BLUE);
-      DrawText((dot_banner.get_player_name() + win_msg).c_str(), win_msg_pos.x, win_msg_pos.y, win_msg_font_size, BLUE);
+      if(win_msg != "") DrawText((dot_banner.get_player_name() + win_msg).c_str(), win_msg_pos.x, win_msg_pos.y, win_msg_font_size, BLUE);
     } else {
       DrawText("None", winner_x, status_y, status_font_size, status_color);
     }
@@ -410,15 +413,15 @@ int main() {
         try {
           next_move();
         } catch (const std::exception& e) {
-            board.set_winner(static_cast<piece>(-board.get_turn()));
-            win_msg = " won due to opponent chrash";
-            game_stopped = true;
-            std::cerr << "Thread crashed: " << e.what() << std::endl;
+          board.set_winner(static_cast<piece>(-board.get_turn()));
+          win_msg = " won due to opponent chrash";
+          game_stopped = true;
+          std::cerr << "Thread crashed: " << e.what() << std::endl;
         } catch (...) {
-            board.set_winner(static_cast<piece>(-board.get_turn()));
-            win_msg = " won due to opponent chrash";
-            game_stopped = true;
-            std::cerr << "Thread crashed: unknown error" << std::endl;
+          board.set_winner(static_cast<piece>(-board.get_turn()));
+          win_msg = " won due to opponent chrash";
+          game_stopped = true;
+          std::cerr << "Thread crashed: unknown error" << std::endl;
         }
       });
     } 

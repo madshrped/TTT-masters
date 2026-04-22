@@ -21,11 +21,6 @@ pkgs.mkShell {
     pkg-config
     bear
     nlohmann_json
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXrandr
-    xorg.libXinerama
-    xorg.libXi
     wayland
     libxkbcommon
   ];
@@ -35,7 +30,6 @@ pkgs.mkShell {
         pkgs.libGL
         pkgs.alsa-lib
         pkgs.pulseaudio
-        pkgs.xorg.libX11
         pkgs.wayland
         pkgs.libxkbcommon
       ]

@@ -1,7 +1,7 @@
 bear -- g++ \
   -fPIC \
   -shared \
-  -I./src/include src/*.cpp \
+  -I./src/include ./src/*.cpp \
   -lstdc++ \
   -lm \
   -lpthread \

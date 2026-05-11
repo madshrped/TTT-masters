@@ -2,6 +2,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 let
+  muslPkgs = pkgs.pkgsMusl;
   raylibStatic = pkgs.raylib.overrideAttrs (old: {
     cmakeFlags = (old.cmakeFlags or [ ]) ++ [
       "-DBUILD_SHARED_LIBS=OFF"
@@ -14,15 +15,13 @@ let
   });
 in
 pkgs.mkShell {
-  buildInputs = with pkgs; [
+  buildInputs = [
     raylibStatic
     glfwStatic
-    gcc
-    pkg-config
-    bear
-    nlohmann_json
-    wayland
-    libxkbcommon
+    muslPkgs.gcc
+    pkgs.pkg-config
+    pkgs.bear
+    pkgs.nlohmann_json
   ];
   shellHook = ''
     export LD_LIBRARY_PATH=${

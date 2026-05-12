@@ -119,7 +119,10 @@ move get_move(raw_boardstate boardstate, std::string so_file_path, std::string f
     void *sym = dlsym(so_file, func_name.c_str());
     if (!sym) {
       std::cerr << "dlsym failed for " << func_name << std::endl;
-      //fallback or exit
+      dlclose(so_file);
+      board.set_winner(static_cast<piece>(-board.get_turn()));
+      win_msg = " won due to currupt SO-file";
+      game_stopped = true;
     }
     std::memcpy(&func, &sym, sizeof(sym));
   }
@@ -157,7 +160,7 @@ void next_move() {
     win_msg = " won due to opponent misplacing";
     game_stopped = true;
   }
-  ready_to_move = true;
+  if(board.get_winner() == EMPTY || !board.get_draw()) ready_to_move = true;
 };
 
 void player_banner_init(){

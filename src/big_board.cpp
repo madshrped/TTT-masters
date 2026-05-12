@@ -102,7 +102,7 @@ void big_board::check_wins() {
     };
 
     if (abs(sum) == 3) {
-      winner = static_cast<piece>(sum / 3.f);
+      winner = static_cast<piece>(sum / 3);
       winning_set = i;
       return;
     };
@@ -182,8 +182,14 @@ void big_board::print() {
       for (int block = 0; block < 3; block++) {
         for (int spot = 0; spot < 3; spot++) {
           std::cout << ' ';
-          std::cout
-              << sub_boards[big_rows * 3 + block].get_spots()[line * 3 + spot];
+          piece current_p = (piece)sub_boards[big_rows * 3 + block].get_spots()[line * 3 + spot];
+          if(current_p == CROSS){
+            std::cout << 'X';
+          } else if (current_p == DOT){
+            std::cout << 'O';
+          } else {
+            std::cout << '+';
+          }
           std::cout << ' ';
         };
         if (sub_boards[big_rows * 3 + block].get_active()) {

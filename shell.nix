@@ -1,22 +1,10 @@
 {
   pkgs ? import <nixpkgs> { },
 }:
-let
-  raylibStatic = pkgs.raylib.overrideAttrs (old: {
-    cmakeFlags = (old.cmakeFlags or [ ]) ++ [
-      "-DBUILD_SHARED_LIBS=OFF"
-    ];
-  });
-  glfwStatic = pkgs.glfw.overrideAttrs (old: {
-    cmakeFlags = (old.cmakeFlags or [ ]) ++ [
-      "-DBUILD_SHARED_LIBS=OFF"
-    ];
-  });
-in
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    raylibStatic
-    glfwStatic
+    raylib
+    glfw
     gcc
     pkg-config
     bear

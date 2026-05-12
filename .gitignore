@@ -1,7 +1,2 @@
-./compile_commands.json
-AI/rando_bot/compile_commands.json
-AI/rando_bot/.cache
-./.cache/
 ./dev-shell.nix
-./TTT-masters
 

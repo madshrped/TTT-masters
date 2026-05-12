@@ -1,4 +1,4 @@
-bear -- g++ \
+g++ \
   -fPIC \
   -shared \
   -I./src/include ./src/*.cpp \

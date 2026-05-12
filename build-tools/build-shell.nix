@@ -6,8 +6,6 @@ pkgs.mkShell {
     raylib
     glfw
     gcc
-    pkg-config
-    bear
     nlohmann_json
     wayland
     libxkbcommon

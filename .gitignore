@@ -1,4 +1,5 @@
 compile_commands.json
 AI/rando_bot/compile_commands.json
 .cache/
-shell.nix
+dev-shell.nix
+TTT-masters

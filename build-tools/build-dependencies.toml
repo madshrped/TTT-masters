@@ -1,0 +1,18 @@
+[build]
+inputs = [
+  "raylib",
+  "nlohmann_json",
+  "gcc",
+  "libxkbcommon",
+  "glfw",
+  "wayland",
+]
+
+[runtime]
+ld_library_path = [
+  "libGL",
+  "alsa-lib",
+  "pulseaudio",
+  "wayland",
+  "libxkbcommon",
+]

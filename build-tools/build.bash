@@ -1,5 +1,5 @@
-bear -- g++ src/*.cpp \
-  -I./src/include \
+g++ src/*.cpp \
+  -Isrc/include \
   -Wl,-Bdynamic -lGL -lGLdispatch -lm -lpthread -ldl -lrt \
   -lraylib \
   -g \

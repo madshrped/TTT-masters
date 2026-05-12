@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "raymath.h"
+
 #include <nlohmann/json.hpp>
 
 #include <cstring>
@@ -392,6 +393,7 @@ int main() {
                   sub_grids[0].get_global_pole_width();
 
   board.print();
+  time_left = (int)settings["timeout"]*1000; 
   getting_move = std::thread(next_move);
   while (!WindowShouldClose()) {
     draw();

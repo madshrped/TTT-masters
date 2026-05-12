@@ -1,5 +1,5 @@
 {
-  "timeout": 10,
+  "timeout": 3,
   "starting_pieces": 6,
   "seed": -1, 
   "dot_path": "AI/hand/",
